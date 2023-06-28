@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: devops
-          image: rolervengador/remigio1000
+          image: edergm/aplicacion
           ports:
             - containerPort: 8080
