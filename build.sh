@@ -8,4 +8,3 @@ gradle bootjar
 docker build -t aplicacion .
 docker tag aplicacion edergm/aplicacion
 docker push edergm/aplicacion
-docker run -dp 8080:8082 aplicacion
