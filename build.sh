@@ -9,3 +9,4 @@ docker build -t aplicacion .
 docker login -u edergm
 docker tag aplicacion edergm/aplicacion
 docker push edergm/aplicacion
+docker run -dp 8080:8082 aplicacion
