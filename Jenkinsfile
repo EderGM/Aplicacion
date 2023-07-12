@@ -6,7 +6,7 @@ pipeline {
                 sh 'git init'
                 sh 'git pull https://github.com/EderGM/aplicacion.git'
                 sh 'chmod +x build.sh'
-		            sh 'docker login -u edergm -p Garrido2023+'
+		sh 'docker login -u edergm -p Garrido2023+'
                 sh './build.sh'
             }
         }
