@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Compilado de Aplicacion usando') {
             agent {
-                label 'roler'
             }
             steps {
                 sh 'chmod +x build.sh'
@@ -13,7 +12,6 @@ pipeline {
         }
          stage('Despliegue de Aplicacion en Kubernetes') {
             agent {
-                label 'roler'
             }
             steps {
                 sh 'chmod +x kubernetes_deployment.sh'
