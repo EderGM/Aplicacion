@@ -1,7 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage('build') {
+        stage('Compilado de Aplicacion usando') {
             agent {
                 label 'roler'
             }
@@ -11,7 +11,7 @@ pipeline {
                 sh './build.sh'
             }
         }
-         stage('deploy') {
+         stage('Despliegue de Aplicacion en Kubernetes') {
             agent {
                 label 'roler'
             }
