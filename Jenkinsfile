@@ -3,11 +3,9 @@ pipeline {
     stages {
         stage('build') {
             agent {
-                label 'linux'
+                label 'roler'
             }
             steps {
-                sh 'git init'
-                sh 'git pull https://github.com/EderGM/aplicacion.git'
                 sh 'chmod +x build.sh'
 		sh 'docker login -u edergm -p Garrido2023+'
                 sh './build.sh'
@@ -15,7 +13,7 @@ pipeline {
         }
          stage('deploy') {
             agent {
-                label 'linux'
+                label 'roler'
             }
             steps {
                 sh 'chmod +x kubernetes_deployment.sh'
