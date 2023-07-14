@@ -1,0 +1,40 @@
+// esta sección esta pensada para el proceso de construcción.
+buildscript {
+    // ext: sirve extender las variables de Gradle.
+    ext {
+        springBootVersion = '3.1.0'
+    }
+    // repositorios solo estan disponibles para el Gradle internamente
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        //alcance o scope
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'checkstyle'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "jacoco"
+
+sourceCompatibility = 1.17
+targetCompatibility = 1.17
+
+// Mi aplicación usará estos repositorios para buscar sus dependencias
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.1.0')
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.1.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '3.1.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '3.1.0'
+}
