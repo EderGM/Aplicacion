@@ -5,6 +5,11 @@ pipeline {
   }
   agent any
   stages {
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/EderGM/aplicacion.git'
+      }
+    }
     stage('Build image') {
       steps{
           sh 'chmod +x build.sh'
@@ -17,7 +22,7 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry( 'https://hub.docker.com/repositories/edergm', registryCredential ) {
+          docker.withRegistry( 'https://hub.docker.com/', registryCredential ) {
             dockerImage.push("latest")
           }
         }
