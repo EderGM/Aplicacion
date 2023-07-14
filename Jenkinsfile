@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    dockerimagename = "aplicacion"
+    dockerimagename = "edergm/aplicacion"
     dockerImage = ""
   }
   agent any
