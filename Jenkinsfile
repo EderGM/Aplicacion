@@ -7,12 +7,9 @@ pipeline {
   stages {
     stage('Build image') {
       steps{
-        script {
-          mkdir aplicacion
-          cd aplicacion
-          gradle bootjar
-          dockerImage = docker.build dockerimagename
-        }
+          sh 'chmod +x build.sh'
+		      sh 'docker login -u edergm -p Garrido2023+'
+          sh './build.sh'
       }
     }
     stage('Pushing Image') {
