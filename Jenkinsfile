@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    dockerimagename = "edergm/aplicacion"
+    dockerimagename = "aplicacion"
     dockerImage = ""
   }
   agent any
@@ -8,6 +8,9 @@ pipeline {
     stage('Build image') {
       steps{
         script {
+          mkdir aplicacion
+          cd aplicacion
+          gradle bootjar
           dockerImage = docker.build dockerimagename
         }
       }
