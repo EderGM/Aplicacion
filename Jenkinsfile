@@ -5,9 +5,16 @@ pipeline {
   }
   agent any
   stages {
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/rolhuama/pruebasdecodigo.git'
+      }
+    }
     stage('Build image') {
       steps{
-        dockerImage = docker.build dockerimagename
+        script {
+          dockerImage = docker.build dockerimagename
+        }
       }
     }
     stage('Pushing Image') {
