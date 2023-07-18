@@ -1,9 +1,10 @@
 pipeline {
-    agent{
-        label 'nodo'
-    }
+    agent none
     stages {
-        stage('git') {
+        stage('Limpieza') {
+        agent{
+            label 'nodo'
+            }
             steps {
                 sh 'minikube delete'
                 sh 'minikube start'
