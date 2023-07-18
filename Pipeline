@@ -1,0 +1,14 @@
+pipeline {
+    agent{
+        label 'nodo'
+    }
+    stages {
+        stage('git') {
+            steps {
+                sh 'minikube delete'
+                sh 'minikube start'
+                sh 'docker rmi -f aplicacion edergm/aplicacion'
+            }
+        }
+    }
+}
