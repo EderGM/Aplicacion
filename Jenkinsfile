@@ -1,6 +1,17 @@
 pipeline {
+	
     agent none
     stages {
+	node {
+  	stage('SCM') {
+    		checkout scm
+ 	}
+ 	 stage('SonarQube Analysis') {
+   	 	withSonarQubeEnv() {
+      		sh "./gradlew sonar"
+    		}
+ 	 }
+	}
         stage('Compilado de Aplicacion usando') {
 	agent {
                 label 'nodo'
