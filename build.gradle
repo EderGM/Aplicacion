@@ -13,7 +13,16 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
+plugins {
+  id "org.sonarqube" version "4.2.1.3168"
+}
 
+sonar {
+  properties {
+    property "sonar.projectKey", "despliegue"
+    property "sonar.projectName", "despliegue"
+  }
+}
 apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
