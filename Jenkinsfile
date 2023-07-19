@@ -1,40 +1,34 @@
 pipeline {
-  environment {
-    dockerimagename = "edergm/aplicacion"
-    dockerImage = ""
-  }
-  agent any
-  stages {
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/rolhuama/pruebasdecodigo.git'
-      }
+    agent none
+    stages {
+      node {
+    stage('SCM') {
+      checkout scm
     }
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
+    stage('SonarQube Analysis') {
+    withSonarQubeEnv() {
+      sh "./gradlew sonar"
         }
       }
     }
-    stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhub'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
+        stage('Compilado de Aplicacion usando') {
+	agent {
+                label 'nodo'
+            }
+            steps {
+                sh 'chmod +x build.sh'
+		sh 'docker login -u edergm -p Garrido2023+'
+                sh './build.sh'
+            }
         }
-      }
-    }
-    stage('Deploying container to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+         stage('Despliegue de Aplicacion en Kubernetes') {
+	 agent {
+                label 'nodo'
+            }
+            steps {
+                sh 'chmod +x kubernetes_deployment.sh'
+                sh './kubernetes_deployment.sh'
+            }
         }
-      }
     }
-  }
 }
