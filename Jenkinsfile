@@ -8,7 +8,8 @@ pipeline {
             steps {
                 sh 'chmod +x build.sh'
 		sh 'docker login -u edergm -p Garrido2023+'
-                sh './home/eder/jenkinsv2/workspace/demov2/build.sh'
+		sh 'sed -i -e 's/\r$//' build.sh'
+                sh './build.sh'
             }
         }
          stage('Despliegue de Aplicacion en Kubernetes') {
