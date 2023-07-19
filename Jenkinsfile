@@ -1,25 +1,30 @@
 pipeline {
     agent {
-                label 'nodo'
-            }
+        label 'nodo'
+    }
     stages {
-  	stage('SCM') {
-    		checkout scm
-  		}
-  	stage('SonarQube Analysis') {
-    		withSonarQubeEnv() {
-      		sh "./gradlew sonar"
-    		}
-  	}
-	
-        stage('Compilado de Aplicacion usando') {
+        stage('SCM') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv() {
+                    sh "./gradlew sonar"
+                }
+            }
+        }
+        stage('Compilado de Aplicacion') {
             steps {
                 sh 'chmod +x build.sh'
-		sh 'docker login -u edergm -p Garrido2023+'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                }
                 sh './build.sh'
             }
         }
-         stage('Despliegue de Aplicacion en Kubernetes') {
+        stage('Despliegue de Aplicacion en Kubernetes') {
             steps {
                 sh 'chmod +x kubernetes_deployment.sh'
                 sh './kubernetes_deployment.sh'
