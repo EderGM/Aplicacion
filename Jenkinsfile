@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'chmod +x build.sh'
 		sh 'docker login -u edergm -p Garrido2023+'
-		sh 'sed -i -e 's/\r$//' build.sh'
+		sh 'sed -i -e 's/^M$//' build.sh'
                 sh './build.sh'
             }
         }
