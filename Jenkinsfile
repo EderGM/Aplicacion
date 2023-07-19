@@ -1,5 +1,5 @@
 pipeline {
-    agent nodo
+    agent nodo {
     stages {
   	stage('SCM') {
     		checkout scm
@@ -24,4 +24,5 @@ pipeline {
             }
         }
     }
+}
 }
