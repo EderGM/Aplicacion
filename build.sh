@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 gradle bootjar
 docker build -t aplicacion .
