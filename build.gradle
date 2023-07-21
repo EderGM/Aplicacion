@@ -19,8 +19,8 @@ plugins {
 
 sonar {
   properties {
-    property "sonar.projectKey", "despliegue"
-    property "sonar.projectName", "despliegue"
+    property "sonar.projectKey", "proyecto"
+    property "sonar.projectName", "proyecto"
   }
 }
 apply plugin: 'application'
