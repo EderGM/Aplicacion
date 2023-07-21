@@ -12,7 +12,11 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh 'chmod +x gradlew'
-                    sh "./gradlew sonar"
+                    sh "./gradlew sonar  \
+                      -Dsonar.projectKey=proyecto \
+                      -Dsonar.projectName='proyecto' \
+                      -Dsonar.host.url=http://192.168.0.77:9000 \
+                      -Dsonar.token=sonartoken"
                 }
             }
         }
